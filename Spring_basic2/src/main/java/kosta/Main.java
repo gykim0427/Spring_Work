@@ -14,7 +14,7 @@ public class Main {
 	/*	BeanFactory factory = 
 				new GenericXmlApplicationContext(resource);*/	//명시적 (스프링컨테이너)
 		
-	/*	123344444444444444444444444444444444444444444ApplicationContext factory = 
+	/*	ApplicationContext factory = 
 				new GenericXmlApplicationContext(resource);*/ //자동적 (스프링컨테이너)
 		
 	/*	ApplicationContext factory = 
