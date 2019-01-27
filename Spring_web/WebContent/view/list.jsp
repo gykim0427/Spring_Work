@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h3>글목록보기</h3>
+	<a href="board_insert.do">글쓰기</a>
 	<table border="1">
 		<tr>
 			<td>번호</td>
@@ -21,7 +22,7 @@
 		<c:forEach var="board" items="${list }">
 			<tr>
 				<td>${board.seq }</td>
-				<td>${board.title }</td>
+				<td><a href="board_detail.do?seq=${board.seq}">${board.title }</a></td>
 				<td>${board.writer }</td>
 				<td>${board.hitcount }</td>
 				<td>${board.regdate }</td>

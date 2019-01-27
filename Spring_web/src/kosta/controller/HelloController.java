@@ -17,7 +17,7 @@ public class HelloController {
 		return service;
 	}
 
-	@Autowired//sertter는 di property방식
+	@Autowired//setter는 di property방식
 	public void setService(HelloService service) {
 		this.service = service;
 	}

@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:annotation-config/>
-	<context:component-scan base-package="kosta"></context:component-scan>
+	<context:component-scan base-package="kosta"></context:component-scan><!--패키지의 객체 scan  -->
 
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/> <!-- 컨트롤러에 없는 url이 요청되더라도 톰캣(was)가 실행할 수 잇다면 그냥 둬라. 즉, index.html도 실행 -->
@@ -23,7 +23,6 @@
 		<property name="suffix" value=".jsp"/>
 	
 	</bean>
-	
 	<!-- MyBatis Setting(템플릿) -->
 	<!-- 최종적으로 필요한건 sqlsession템플릿 -->
 	<bean id="sqlSessionTemplate"

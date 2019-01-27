@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +19,15 @@ import kosta.model.BoardDao;
 @Controller
 public class BoardController {
 	private BoardDao dao;
-
+	
+	public BoardDao getDao() {
+		return dao;
+	}
+	
+	@Autowired
+	public void setDao(BoardDao dao) {
+		this.dao = dao;
+	}
 	/*
 	@RequestMapping(value="/insert_form.do", method=RequestMethod.GET)
 	public String insertform(Model model){ //데이터타입이 string이라면 , Model에서 받는다. 즉, 데이터 받는방법 데이터타입2가지 : modelandview, string-model
@@ -33,14 +42,7 @@ public class BoardController {
 		
 		return "insert_form";
 	}
-	
-	public BoardDao getDao() {
-		return dao;
-	}
-	@Autowired
-	public void setDao(BoardDao dao) {
-		this.dao = dao;
-	}
+
 
 	@RequestMapping(value="/board_insert.do", method=RequestMethod.POST)
 	public String board_insert(@ModelAttribute("boardCommand") @Valid Board board, BindingResult errors){ 
@@ -49,7 +51,6 @@ public class BoardController {
 		{
 			System.out.println("에러 발생");
 			return "insert_form";
-			
 		}
 		dao.insert(board);
 		
@@ -66,7 +67,38 @@ public class BoardController {
 		return "list";
 		//뷰 이름 정하기
 	}
+	
+	@RequestMapping("/board_detail.do")
+	public String board_detail(int seq, Model model){
+		Board board =dao.getBoard(seq);
+		model.addAttribute("board", board);
+		
+		
+		return "detail";
+	}
+	
+	@RequestMapping("/board_update.do")
+	public String board_update(int seq, Model model){
+		Board board =dao.getBoard(seq);
+		model.addAttribute("board", board);
+		
+		return "update_form";
+	}
 
+	@RequestMapping("/board_update2.do")
+	public String board_update(Board board, Model model){
+		dao.updateBoard(board);
+		
+		return "redirect:board_list";
+	}
+	
+	@RequestMapping("/board_delete.do")
+	public String board_delete(Board board, Model model){
+		dao.deleteBoard(board);
+		
+		return "redirect:board_list";
+	}
+	
 	/*@InitBinder
 	protected void InitBinder(WebDataBinder binder){
 		binder.setValidator(new BoardValidator());
